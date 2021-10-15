@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 public class Author {
 
+//This is from testBranch
+
     private Vocabulary vocabulary;
     private Random rand;
     private String generatedText;
