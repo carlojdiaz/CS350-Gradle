@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Test of the Vocabulary class
  */
-public class VocabTest0 {
+public class VocabTest {
                   
 
     @Test
