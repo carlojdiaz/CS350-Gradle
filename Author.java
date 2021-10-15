@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class Author {
 
+
     private Vocabulary vocabulary;
     private Random rand;
     private String generatedText;
@@ -133,4 +134,4 @@ public class Author {
 
 }
 
-// This is from master
+// This is from testBranch
