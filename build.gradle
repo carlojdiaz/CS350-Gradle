@@ -18,18 +18,10 @@ repositories {
     jcenter()
 }
 
-task VocabTest{
-    println "Running unit tests"
-}
-
 dependencies {
-    implementation 'org.hamcrest:hamcrest-library:2.2'
-    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    implementation 'junit:junit:4.12'
-
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    testImplementation 'junit:junit:4.12' 
+    testImplementation 'junit:junit:4.13.2' 
 }
 
 test {
