@@ -1,4 +1,3 @@
-package imitation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
