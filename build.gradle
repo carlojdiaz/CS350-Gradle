@@ -7,6 +7,7 @@
 
 plugins {
     id 'java'
+    id "org.xbib.gradle.plugin.git" version "2.0.0"
 }
 
 java {
@@ -22,6 +23,32 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'junit:junit:4.13.2' 
+}
+
+task reports (dependsOn: ['test', 'javadoc']){
+    println "test and javadoc tasks successful"
+}
+
+task deployReports (dependsOn: 'reports'){
+    println "reports task successful"
+    doLast{
+        def thisRepo = rootProject.projectDir.toString()
+        def docsDir = './build/docs'
+        def reportsDir = './build/reportsDir'
+        project.delete {
+            delete docsDir
+            delete reportsDir
+        }
+        def grgit = git.clone {
+            dir = 'build/docs'
+            uri = 'file' + thisRepo
+            bare = false
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout{
+            branch = 'gh-pages'
+        }
+    }
 }
 
 test {
