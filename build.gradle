@@ -26,7 +26,9 @@ dependencies {
 }
 
 task reports (dependsOn: ['test', 'javadoc']){
-    println "test and javadoc tasks successful"
+    doLast{
+        println "test and javadoc tasks successful"
+    }
 }
 
 task deployReports (dependsOn: 'reports'){
