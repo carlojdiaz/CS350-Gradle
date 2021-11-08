@@ -35,22 +35,22 @@ task deployReports (dependsOn: 'reports'){
     println "reports task successful"
     doLast{
         def thisRepo = rootProject.projectDir.toString()
-        def docsDir = './build/docs'
-        def reportsDir = './build/reportsDir'
-        project.delete {
-            delete docsDir
-            delete reportsDir
-        }
+        def docsDir = "$buildDir/docsDir"
         def grgit = git.clone {
-            dir = 'build/docs'
-            uri = 'file' + thisRepo
+            dir = docsDir
+            uri = 'file:' + thisRepo
             bare = false
             refToCheckout = 'gh-pages'
         }
-        grgit.checkout{
+        grgit.checkout {
             branch = 'gh-pages'
         }
     }
+}
+
+task copyReports(type: Copy, dependsOn: 'deployReports'){
+    from "$buildDir/docs"
+    into "$buildDir/docs"
 }
 
 test {
