@@ -26,29 +26,18 @@ dependencies {
 }
 
 task reports (dependsOn: ['test', 'javadoc']){
-    println "test and javadoc tasks successful"
+    doLast{
+        println "test and javadoc tasks successful"
+    }
 }
 
 task deployReports (dependsOn: 'reports'){
     println "reports task successful"
-    doLast{
-        def thisRepo = rootProject.projectDir.toString()
-        def docsDir = './build/docs'
-        def reportsDir = './build/reportsDir'
-        project.delete {
-            delete docsDir
-            delete reportsDir
-        }
-        def grgit = git.clone {
-            dir = 'build/docs'
-            uri = 'file' + thisRepo
-            bare = false
-            refToCheckout = 'gh-pages'
-        }
-        grgit.checkout{
-            branch = 'gh-pages'
-        }
-    }
+}
+
+task copyReports(type: Copy, dependsOn: 'deployReports'){
+    from "$buildDir/docs"
+    into "$buildDir/docs"
 }
 
 test {
