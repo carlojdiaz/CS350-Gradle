@@ -55,30 +55,6 @@ task deployReports (dependsOn: 'reports'){
     }
 }
 
-task copyReports(type: Copy, dependsOn: 'deployReports'){
-    from "$buildDir/docs"
-    into "./docs"
-}
-
-task commitReports(dependsOn: 'copyReports'){
-    group = "Reporting"
-    description 'Pushes build/docs and build/reports directories and its contents to gh-pages branch'
-    doLast{
-        def docsDir = "$buildDir/docs"
-        def grgit = git.clone{
-            refToCheckout = 'gh-pages'
-        }
-        grgit = git.open{
-            dir = docsDir + "/.git"
-        }
-        grgit.add (update: true, patterns: ['docs'])
-        grgit.commit{
-            message = "Committing build/docs"
-        }
-        grgit.push{}
-    }
-}
-
 test {
     ignoreFailures = true
     useJUnitPlatform()
