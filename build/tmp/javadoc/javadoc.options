@@ -1,8 +1,0 @@
--classpath 'C:\\Users\\Carlo Diaz\\Documents\\College Stuff\\Fall 2021\\CS350\\CS350-Gradle\\build\\classes\\java\\main;C:\\Users\\Carlo Diaz\\Documents\\College Stuff\\Fall 2021\\CS350\\CS350-Gradle\\build\\resources\\main'
--d 'C:\\Users\\Carlo Diaz\\Documents\\College Stuff\\Fall 2021\\CS350\\CS350-Gradle\\build\\docs\\javadoc'
--doctitle 'CS350-Gradle API'
--notimestamp 
--quiet 
--windowtitle 'CS350-Gradle API'
-'C:\\Users\\Carlo Diaz\\Documents\\College Stuff\\Fall 2021\\CS350\\CS350-Gradle\\src\\main\\java\\Author.java'
-'C:\\Users\\Carlo Diaz\\Documents\\College Stuff\\Fall 2021\\CS350\\CS350-Gradle\\src\\main\\java\\Vocabulary.java'

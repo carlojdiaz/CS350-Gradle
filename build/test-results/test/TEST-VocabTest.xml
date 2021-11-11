@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="VocabTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-11T21:58:52" hostname="CARLOPC" time="0.025">
-  <properties/>
-  <testcase name="testAddWordPair()" classname="VocabTest" time="0.022"/>
-  <testcase name="testConstructor()" classname="VocabTest" time="0.001"/>
-  <testcase name="testAddStartingWord()" classname="VocabTest" time="0.001"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
