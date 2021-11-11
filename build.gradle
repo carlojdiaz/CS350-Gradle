@@ -35,27 +35,26 @@ task reports (dependsOn: ['test', 'javadoc']){
 task deployReports (dependsOn: 'reports'){
     description 'Ensures "reports" task is executed, and \n\t\tCopies build/docs and build/reports directories into gh-pages branch'
     doLast{
-        def thisRepo = rootProject.projectDir.toString()
-        def docsDir = "$buildDir/docs"
-        def grgit = git.clone{
-            dir = docsDir
-            uri = 'file:' + thisRepo
-            bare = false;
-            refToCheckout = 'gh-pages'
-        }
-        grgit.checkout{
-            branch = 'gh-pages'
-        }
+
         println '"reports" task successful'
     }
 }
 
-task copyReports(type: Copy, dependsOn: 'deployReports'){
-    from "$buildDir/docs"
-    into "$buildDir/docs"
-
-    from "$buildDir/reports"
-    into "$buildDir/reports"
+task commitReports(dependsOn: 'deployReports'){
+    group = "Reporting"
+    description 'Pushes build/docs and build/reports directories and its contents to gh-pages branch'
+    doLast{
+        def docsDir = "$buildDir/docs"
+        def grgit = git.open{
+            dir = docsDir + "/.git"
+        }
+        grgit.add (update: true)
+        grgit.commit{
+            message = "Committing build/docs"
+        }
+        grgit.push{}
+        def reportsDir = "$buildDir/reports"
+    }
 }
 
 test {
