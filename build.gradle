@@ -41,9 +41,9 @@ task reports (dependsOn: ['test', 'javadoc']){
 task deployReports (dependsOn: 'reports'){
     description 'Ensures "reports" task is executed, and\n\t\tCopies build/docs and build/reports directories into gh-pages branch'
     doLast{
-        mkdir 'build/gh-pages'
+        mkdir 'docs'
         def thisRepo = rootProject.projectDir.toString()
-        def docsDir = "$buildDir/gh-pages"
+        def docsDir = "$rootDir/docs"
         project.delete {
             delete docsDir
         }
