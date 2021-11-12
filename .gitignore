@@ -25,11 +25,7 @@ hs_err_pid*
 .gradle
 
 # Ignore Gradle build output directory
-build/classes
-build/generated
-build/libs
-build/test-results
-build/tmp
+build
 bin
 *.class
 .classpath
