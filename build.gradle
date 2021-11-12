@@ -56,6 +56,8 @@ task deployReports (dependsOn: 'reports'){
         grgit.checkout {
             branch = 'gh-pages'
         }
+
+        println '"reports" task successful'
     }
 }
 
