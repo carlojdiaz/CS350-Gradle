@@ -22,3 +22,4 @@ jobs:
       working-directory: .
       timeout-minutes: 3
       run: ./gradlew build
+      run: ./gradlew build tasks --all
