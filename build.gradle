@@ -70,7 +70,6 @@ task commitReports (dependsOn: 'copyReports') {
         grgit.commit {
             message = "Pushing changes"
         }
-        grgit.push {}
     }
 }
 
