@@ -5,6 +5,12 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/6.7/samples
  */
 
+buildscript {
+    dependencies {
+        classpath "org.jbake:jbake-gradle-plugin:5.0.0"
+    }
+}
+
 plugins {
     id 'java'
     id "org.xbib.gradle.plugin.git" version "2.0.0"
@@ -35,7 +41,43 @@ task reports (dependsOn: ['test', 'javadoc']){
 task deployReports (dependsOn: 'reports'){
     description 'Ensures "reports" task is executed, and\n\t\tCopies build/docs and build/reports directories into gh-pages branch'
     doLast{
-        println '"reports" task successful'
+        mkdir 'docs'
+        def thisRepo = rootProject.projectDir.toString()
+        def docsDir = "docs"
+        project.delete {
+            delete docsDir
+        }
+        def grgit = git.clone {
+            dir = docsDir
+            uri = 'file:' + thisRepo
+            bare = ignoreFailures
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {
+            branch = 'gh-pages'
+        }
+    }
+}
+
+task copyReports (type: Copy, dependsOn: ['bake', 'clonePages']){
+    from "$buildDir/jbake"
+    into "docs"
+}
+
+task commitPages (dependsOn: 'copyReports') {
+    group = "Reporting"
+    description 'Pushes copies of build/docs and build/reports to docs and reports directories in gh-pages branch'
+    doLast{
+        def docsDir = "docs"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        grgit.commit {
+            message = "Pushing docs and reports directories"
+        }
+        grgit.push {}
     }
 }
 
