@@ -41,16 +41,16 @@ task reports (dependsOn: ['test', 'javadoc']){
 task deployReports (dependsOn: 'reports'){
     description 'Ensures "reports" task is executed, and\n\t\tCopies build/docs and build/reports directories into gh-pages branch'
     doLast{
-        mkdir 'docs'
+        mkdir 'build/gh-pages'
         def thisRepo = rootProject.projectDir.toString()
-        def docsDir = "docs"
+        def docsDir = "$buildDir/gh-pages"
         project.delete {
             delete docsDir
         }
         def grgit = git.clone {
             dir = docsDir
             uri = 'file:' + thisRepo
-            bare = ignoreFailures
+            bare = false
             refToCheckout = 'gh-pages'
         }
         grgit.checkout {
