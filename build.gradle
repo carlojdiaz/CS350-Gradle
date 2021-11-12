@@ -61,6 +61,19 @@ task copyReports (type: Copy, dependsOn: 'deployReports') {
     into 'docs'
 }
 
+task commitReports (dependsOn: 'copyReports') {
+    group = "Reporting"
+    description 'Pushes docs and reports directories to gh-pages branch'
+    doLast{
+        grgit.add (update: false, patterns: ['docs'])
+        grgit.add (update: true, patterns: ['docs'])
+        grgit.commit {
+            message = "Pushing changes"
+        }
+        grgit.push {}
+    }
+}
+
 test {
     ignoreFailures = true
     useJUnitPlatform()
